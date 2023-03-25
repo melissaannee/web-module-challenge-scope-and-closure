@@ -30,11 +30,19 @@ console.log('example task:', processFirstItem(['foo','bar'],function(str){return
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
-  
+
+      The difference between counter1 and counter2 is that counter2 contains only a single function, while conter1 contains a function within another function.
+
   2. Which of the two uses a closure? How can you tell?
+
+      counter1 uses a closure because it has an inner return function within the curly braces of another function.
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+        counter1 code would be preferable when you want to use a function limited to the parent function without affecting the rest of the code outside of the function. 
+
+        counter2 code would be preferable when you want the function to be accessable throughout the other code on a global scope.
 */
 
 // counter1 code
@@ -64,10 +72,10 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
-    /*Code Here*/
+function inning(){
+  return Math.round(Math.random() * 2)
 }
-
+console.log(inning())
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -83,9 +91,18 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*Code Here*/){
-  /*Code Here*/
+function finalScore(inning, totalInnings){
+  let obj = {
+    "Home": 0,
+    "Away": 0,
+  }
+  for (let i = 0; i < totalInnings; i++) {
+    obj["Home"] += inning()
+    obj["Away"] += inning()
+  }
+  return obj
 }
+console.log(finalScore(inning, 9))
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
@@ -101,11 +118,14 @@ For example: invoking getInningScore(inning) might return this object:
   */
 
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
-
+function getInningScore(callbackFunc) {
+  let obj = {
+    "Home": 0 + inning(),
+    "Away": 0 + inning(),
+  }
+return obj
 }
-
+console.log(getInningScore(inning))
 
 /* STRETCH: ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
